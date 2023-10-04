@@ -16,7 +16,6 @@ h2 {
     justify-content: center;
     /* this will center content vertically */
     align-items: center;
-    /* tells the container to align the children in columns rather than rows */
 }
 
 .flex-column {

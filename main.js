@@ -41,12 +41,24 @@ function init() {
 };
 
 function render() {
+
+    if(board[index] == ''){
     board.forEach(function(mark, index) {
-    //this sets the text content of the square of the same position to the mark on the board. 
-    squares[index].textContent = mark;
+      //this sets the text content of the square of the same position to the mark on the board. 
+    squares[index].textContent = mark; // X's and O's
     });
-    
-    messages.textContent = `It's ${turn}'s turn!`;
+  }
+   // messages.textContent = win === 'T' ? `Game is a tie!` : win ? `${win} wins the game!` : `It's ${turn}'s turn!`;
+
+   //Above ternary as an if-else if- else block
+
+   if ( win === 'T' ) {
+     messages.textContent = `Game is a tie!`
+    } else if (win) { 
+     messages.textContent = `${win} wins the game!`
+    } else {
+     messages.textContent = `It's ${turn}'s turn!`
+    }
 };
 
 function getWinner() {
@@ -64,6 +76,10 @@ function getWinner() {
     } else {
       return 'T' // no winner and no empty spaces? That's a tie!
     }
+
+    // Above if- else if - else block as a ternary
+    // return winner ? winner : board.includes('') ? null : 'T'; 
+
 };
 
 function handleTurn() {
@@ -73,13 +89,15 @@ function handleTurn() {
     board[idx] = turn;
 
     turn = turn === 'X' ? 'O' : 'X';
-    // Example of an if statement 
+
+    // Above ternary as an if-else block 
     // if (turn === 'X') {
     // turn = 'O' 
     // } else {
     // turn = 'X' 
     // };
-    win = getWinner();
+
+    win = getWinner(); 
     render();
 };
 
