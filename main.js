@@ -1,4 +1,4 @@
-console.log('Your JS is linked up. Be the person you needed when you were little.')
+//console.log('Your JS is linked up. Be the person you needed when you were little.')
 
 /*----- constants -----*/
 const winningCombos = [
@@ -21,10 +21,9 @@ let win;
 /*----- cached element references -----*/
 const squares = Array.from(document.querySelectorAll('#board div'));
 
-
-
 /*----- event listeners -----*/
 document.getElementById('board').addEventListener('click', handleTurn);
+
 const messages = document.querySelector('h2');
 
 document.getElementById('reset-button').addEventListener('click', init);
@@ -46,19 +45,18 @@ function render() {
     //this sets the text content of the square of the same position to the mark on the board. 
     squares[index].textContent = mark;
     });
-    // new code below
+    
     messages.textContent = `It's ${turn}'s turn!`;
 };
 
 function getWinner() {
-    // just stub it up for now.
     let winner = null;
     winningCombos.forEach((combo, index) => {
     if (board[combo[0]] && board[combo[0]] === board[combo[1]] && board[combo[0]] === board[combo[2]]) {
     winner = board[combo[0]];
     }
     });
-    // new code below
+    
     if (winner) {
       return winner 
     } else if (board.includes('')) {
@@ -73,15 +71,15 @@ function handleTurn() {
     return square === event.target;
     });
     board[idx] = turn;
-    // This is tidy
+
     turn = turn === 'X' ? 'O' : 'X';
-    // In an if statement it would look like: 
+    // Example of an if statement 
     // if (turn === 'X') {
     // turn = 'O' 
     // } else {
     // turn = 'X' 
     // };
-    // writing the ternary saved you from all that. 
+    win = getWinner();
     render();
 };
 
