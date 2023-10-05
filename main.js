@@ -42,22 +42,20 @@ function init() {
 
 function render() {
 
-    if(board[index] == ''){
-    board.forEach(function(mark, index) {
-      //this sets the text content of the square of the same position to the mark on the board. 
-    squares[index].textContent = mark; // X's and O's
-    });
-  }
+  board.forEach(function(mark, index) {
+  //this sets the text content of the square of the same position to the mark on the board. 
+  squares[index].textContent = mark; // X's and O's
+  });
    // messages.textContent = win === 'T' ? `Game is a tie!` : win ? `${win} wins the game!` : `It's ${turn}'s turn!`;
 
    //Above ternary as an if-else if- else block
 
    if ( win === 'T' ) {
-     messages.textContent = `Game is a tie!`
+     messages.textContent = `Game is a tie!`;
     } else if (win) { 
-     messages.textContent = `${win} wins the game!`
+     messages.textContent = `${win} wins the game!`;
     } else {
-     messages.textContent = `It's ${turn}'s turn!`
+     messages.textContent = `It's ${turn}'s turn!`;
     }
 };
 
@@ -70,11 +68,11 @@ function getWinner() {
     });
     
     if (winner) {
-      return winner 
+      return winner; 
     } else if (board.includes('')) {
-      return null // if there's an empty space, return null (no winner yet)
+      return null; // if there's an empty space, return null (no winner yet)
     } else {
-      return 'T' // no winner and no empty spaces? That's a tie!
+      return 'T'; // no winner and no empty spaces? That's a tie!
     }
 
     // Above if- else if - else block as a ternary
@@ -84,11 +82,15 @@ function getWinner() {
 
 function handleTurn() {
     let idx = squares.findIndex(function(square) {
-    return square === event.target;
+        return square === event.target; 
     });
-    board[idx] = turn;
-
-    turn = turn === 'X' ? 'O' : 'X';
+    
+    
+    if(board[idx] === ''){
+      board[idx] = turn;
+      turn = turn === 'X' ? 'O' : 'X';
+      //board[idx] = turn;
+    }
 
     // Above ternary as an if-else block 
     // if (turn === 'X') {
