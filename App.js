@@ -13,26 +13,56 @@ function App() {
 
     const [board, setBoard] = React.useState(["","","","","","","","",""])
     let gameOver = false
-    let turn = 'X'
-    let win
+    const [turn, setTurn] = React.useState('X')
+    const[win, setWin] = React.useState(null)
+
+    function getWinner() {
+        let winner = null;
+            winningCombos.forEach((combo, index) => {
+                if (board[combo[0]] && board[combo[0]] === board[combo[1]] && board[combo[0]] === board[combo[2]]) {
+                    winner = board[combo[0]];
+                }
+            });
+
+        if (winner) {
+            return winner; 
+            } else if (board.includes('')) {
+                return null; // if there's an empty space, return null (no winner yet)
+            } else {
+                return 'T'; // no winner and no empty spaces? That's a tie!
+            }
+
+    };
 
     function handleTurn(event) {
+        // alert('clicked!')
+        //let idx = squares.findIndex(function(square)){
+        //      return square === event.target;
+        //}
         console.log(event.target, event.target.id)
         let idx = event.target.id
         if(gameOver == false) {
             let newBoard = [...board]
             newBoard[idx] = turn
             setBoard(newBoard)
-            turn = turn === 'X' ? 'O' : 'X'
-          //win = getWinner()
+            let nextTurn = turn === 'X' ? 'O' : 'X'
+            setTurn(nextTurn)
+            let whoWon = getWinner()
+            setWin(whoWon)
           //render()
         }
+    }
+
+    function Message(){
+        let message = win === `T`? `Game is a tie!` : win? `${win} wins the game!`: `It's ${turn}'s turn!`;
+
+        return <h2>{message}</h2>
     }
 
     return (
         <div>
             <h1>Tic-React-Toe</h1>
-            <h2>It's X's turn!</h2>
+            <Message />
 
             <div className="flex-container flex-column">
             <div className="flex-container flex-wrap" id="board" onClick={handleTurn}>
