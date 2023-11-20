@@ -25,6 +25,7 @@ function App() {
             });
 
         if (winner) {
+            gameOver = true
             return winner; 
             } else if (board.includes('')) {
                 return null; // if there's an empty space, return null (no winner yet)
